@@ -1,7 +1,8 @@
 # IT5007 Tutorial 5
 
-<code>
-$ npm install <br/>
-$ mongo waitlist scripts/init.mongo.js <br/>
+```
+$ npm install
+$ service mongodb start
+$ mongo waitlist scripts/init.mongo.js
 $ npm start
-</code>
+```
