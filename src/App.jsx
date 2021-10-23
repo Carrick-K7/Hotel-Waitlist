@@ -141,7 +141,7 @@ class DisplayFreeSlots extends React.Component {
   
       const data = await graphQLFetch(query);
       if (data) {
-        this.setState({ free_cnt: data.getLength });
+        this.setState({ free_cnt: 25 - data.getLength });
       }
     } else {
       this.setState({free_show: 'none', free_text: 'Display Free Slots'});
@@ -206,7 +206,7 @@ class CustomerList extends React.Component {
 
     const data = await graphQLFetch(query);
     if (data) {
-      this.setState({ customers: data.waitlist, free_cnt: data.getLength});
+      this.setState({ customers: data.waitlist, free_cnt: 25 - data.getLength});
     }
   }
 

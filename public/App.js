@@ -297,7 +297,7 @@ var DisplayFreeSlots = /*#__PURE__*/function (_React$Component8) {
 
                 if (data) {
                   this.setState({
-                    free_cnt: data.getLength
+                    free_cnt: 25 - data.getLength
                   });
                 }
 
@@ -452,7 +452,7 @@ var CustomerList = /*#__PURE__*/function (_React$Component9) {
                 if (data) {
                   this.setState({
                     customers: data.waitlist,
-                    free_cnt: data.getLength
+                    free_cnt: 25 - data.getLength
                   });
                 }
 

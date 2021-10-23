@@ -57,6 +57,11 @@ async function getLength() {
   return count;
 }
 
+async function ifExisted(_, { customer }) {
+  const ifExisted = await db.collection('waitlist').findOne({name: customer.name, mobile: customer.mobile});
+  return ifExisted;
+}
+
 async function getNextSequence(name) {
   const result = await db.collection('counters').findOneAndUpdate(
     { _id: name },
@@ -69,11 +74,15 @@ async function getNextSequence(name) {
 async function addCustomer(_, { customer }) {
   const count = await getLength();
   if (count >= 5) {
-    throw new Error('No free slots!')
+    throw new Error('No free slots!');
   } else {
     customer.id = await getNextSequence('waitlist');
     customer.timestamp = new Date();
 
+    const ifExisted = await db.collection('waitlist').findOne({ name: customer.name, mobile: customer.mobile })
+    if (ifExisted) {
+      throw new Error('User existed!')
+    }
     const result = await db.collection('waitlist').insertOne(customer)
     const savedCustomer = await db.collection('waitlist').
       findOne({_id: result.insertedId})
